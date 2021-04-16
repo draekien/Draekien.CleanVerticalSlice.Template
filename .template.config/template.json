@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Draekien",
+  "classifications": ["Api"],
+  "identity": "Draekien.CleanVerticalSlice.Template",
+  "name": "Clean Vertical Slice Architecture API Template",
+  "shortName": "cvsapi",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Draekien.CleanVerticalSlice",
+  "preferNameDirectory": true
+}
