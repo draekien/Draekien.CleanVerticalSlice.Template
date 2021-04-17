@@ -8,10 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Common.Api\Common.Api.csproj" />
-      <ProjectReference Include="..\..\..\Common\Common.Api\Common.Api.csproj" />
       <ProjectReference Include="..\WeatherForecast.Application\WeatherForecast.Application.csproj" />
       <ProjectReference Include="..\WeatherForecast.Infrastructure\WeatherForecast.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Draekien.CleanVerticalSlice.Common.Api" Version="1.0.0" />
     </ItemGroup>
 
 </Project>

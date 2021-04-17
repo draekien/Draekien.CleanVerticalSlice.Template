@@ -7,18 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Draekien.CleanVerticalSlice.Common.Application" Version="1.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Commands" />
-      <Folder Include="Common" />
-      <Folder Include="Entities" />
-      <Folder Include="Queries" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
-    </ItemGroup>
-
 </Project>

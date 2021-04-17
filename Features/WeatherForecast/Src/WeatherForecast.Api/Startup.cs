@@ -1,21 +1,9 @@
-using System;
-using System.IO;
-using System.Reflection;
-
-using Common.Api;
-using Common.Api.Configuration;
-
-using Hellang.Middleware.ProblemDetails;
-
+using Draekien.CleanVerticalSlice.Common.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-
-using Newtonsoft.Json.Converters;
-
 using WeatherForecast.Application;
 using WeatherForecast.Infrastructure;
 
@@ -35,7 +23,14 @@ namespace WeatherForecast.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCommonApi(HostEnvironment, typeof(Startup).Namespace, new[] { typeof(Startup).Assembly, typeof(Application.DependencyInjection).Assembly });
+            services.AddCommonApi(
+                HostEnvironment,
+                typeof(Startup).Namespace,
+                new[]
+                {
+                    typeof(Startup).Assembly,
+                    typeof(Application.DependencyInjection).Assembly
+                });
 
             services.AddApplication();
             services.AddInfrastructure();

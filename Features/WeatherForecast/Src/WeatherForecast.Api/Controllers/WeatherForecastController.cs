@@ -1,40 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Draekien.CleanVerticalSlice.Common.Api.Controllers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using WeatherForecast.Application.Queries.GetWeatherForecast;
 
 namespace WeatherForecast.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : ApiControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
-
+        /// <summary>Gets the weather forecast for the next X days</summary>
+        /// <param name="query">The number of days to forecast</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken" /></param>
+        /// <returns>A list of weather forecasts for the next X days</returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [ProducesResponseType(typeof(IEnumerable<ForecastVm>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAsync([FromQuery] GetWeatherForecastQuery query, CancellationToken cancellationToken)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5)
-                             .Select(index => new WeatherForecast
-                             {
-                                 Date = DateTime.Now.AddDays(index),
-                                 TemperatureC = rng.Next(-20, 55),
-                                 Summary = Summaries[rng.Next(Summaries.Length)]
-                             })
-                             .ToArray();
+            IEnumerable<ForecastVm> result = await Mediator.Send(query, cancellationToken);
+
+            return Ok(result);
         }
     }
 }
