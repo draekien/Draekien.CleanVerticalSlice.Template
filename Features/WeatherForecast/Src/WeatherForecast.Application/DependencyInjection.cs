@@ -1,4 +1,6 @@
-﻿using Draekien.CleanVerticalSlice.Common.Application;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Draekien.CleanVerticalSlice.Common.Application;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WeatherForecast.Application
@@ -13,7 +15,7 @@ namespace WeatherForecast.Application
              * - MediatR requests and handlers
              * - Pipeline behaviour for validating MediatR requests using Fluent Validation
              */
-            services.AddCommonApplication();
+            services.AddCommonApplication(new List<Assembly> { typeof(DependencyInjection).Assembly });
         }
     }
 }

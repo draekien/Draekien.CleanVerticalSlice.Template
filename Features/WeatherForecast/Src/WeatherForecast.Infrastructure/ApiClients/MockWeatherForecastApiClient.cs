@@ -40,5 +40,11 @@ namespace WeatherForecast.Infrastructure.ApiClients
 
             return await Task.FromResult(result);
         }
+
+        /// <inheritdoc />
+        public async Task<bool> SubmitForecastAsync(Forecast forecast, CancellationToken cancellationToken)
+        {
+            return await Task.FromResult(true);
+        }
     }
 }

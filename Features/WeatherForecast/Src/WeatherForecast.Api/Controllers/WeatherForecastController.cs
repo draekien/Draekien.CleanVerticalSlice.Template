@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Draekien.CleanVerticalSlice.Common.Api.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WeatherForecast.Application.Commands.SubmitWeatherForecast;
 using WeatherForecast.Application.Queries.GetWeatherForecast;
 
 namespace WeatherForecast.Api.Controllers
@@ -21,6 +22,21 @@ namespace WeatherForecast.Api.Controllers
             IEnumerable<ForecastVm> result = await Mediator.Send(query, cancellationToken);
 
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Submits a weather forecast for a day in the future
+        /// </summary>
+        /// <param name="command">The forecast to submit</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/></param>
+        /// <returns>True on success</returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        public async Task<IActionResult> PostAsync([FromBody] SubmitWeatherForecastCommand command, CancellationToken cancellationToken)
+        {
+            await Mediator.Send(command, cancellationToken);
+
+            return Accepted();
         }
     }
 }

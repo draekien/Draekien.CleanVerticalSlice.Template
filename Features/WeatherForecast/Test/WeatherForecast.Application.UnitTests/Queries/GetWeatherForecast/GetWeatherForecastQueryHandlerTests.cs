@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using AutoMapper;
 using Draekien.CleanVerticalSlice.Common.Application.Mappings;
+using Draekien.CleanVerticalSlice.Common.TestUtils.Mappings;
 using FluentAssertions;
 using MediatR;
 using WeatherForecast.Application.Interfaces;
@@ -20,7 +21,7 @@ namespace WeatherForecast.Application.UnitTests.Queries.GetWeatherForecast
         public GetWeatherForecastQueryHandlerTests()
         {
             IWeatherForecastApiClient weatherForecastApiClient = new MockWeatherForecastApiClient();
-            IMapper mapper = new Mapper(new MapperConfiguration(config => { config.AddProfile(new MappingProfile(typeof(DependencyInjection).Assembly)); }));
+            IMapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new AutoMapperTestingProfile(typeof(DependencyInjection).Assembly))));
 
             _sut = new GetWeatherForecastQuery.Handler(weatherForecastApiClient, mapper);
         }

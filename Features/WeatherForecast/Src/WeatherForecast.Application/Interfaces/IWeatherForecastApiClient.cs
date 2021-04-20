@@ -10,9 +10,17 @@ namespace WeatherForecast.Application.Interfaces
         /// <summary>
         /// Gets the weather forecast for the next X days
         /// </summary>
-        /// <param name="days"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="days">The number of days</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/></param>
         /// <returns></returns>
         Task<IEnumerable<Forecast>> GetForecastAsync(int days, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Submit a weather forecast reading
+        /// </summary>
+        /// <param name="forecast">The <see cref="Forecast"/> being submitted</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/></param>
+        /// <returns>True on success</returns>
+        Task<bool> SubmitForecastAsync(Forecast forecast, CancellationToken cancellationToken);
     }
 }
